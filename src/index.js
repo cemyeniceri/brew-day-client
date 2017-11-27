@@ -22,9 +22,11 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route component={App}>
-                <Route path="/" component={requireAuthentication(HomePage)}/>
                 <Route path="/login" component={LoginPage}/>
-                <Route path="/principal" component={requireAuthentication(PrincipalPage)}/>
+                <Route path="/" component={requireAuthentication(HomePage)}/>
+                <Route path="/recipes" component={requireAuthentication(PrincipalPage)}/>
+                <Route path="/ingredients" component={requireAuthentication(PrincipalPage)}/>
+                <Route path="/shop-lists" component={requireAuthentication(PrincipalPage)}/>
             </Route>
         </Router>
     </Provider>, app

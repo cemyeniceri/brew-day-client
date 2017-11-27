@@ -42,19 +42,19 @@ class App extends Component {
                         <li className="header"><span>Home Brewer</span></li>
                         <li className="divider"></li>
                         <li className="no-menu">
-                            <a href="recipe" title="Recipes Page" className="sfActive">
+                            <a href="/recipes" title="Recipes Page" className="sfActive">
                                 <i className="glyph-icon icon-linecons-lightbulb"></i>
                                 <span>Recipes</span>
                             </a>
                         </li>
                         <li className="no-menu">
-                            <a href="ingredients" title="Ingredients Page" className="sfActive">
+                            <a href="/ingredients" title="Ingredients Page" className="sfActive">
                                 <i className="glyph-icon icon-linecons-beaker"></i>
                                 <span>Ingredients</span>
                             </a>
                         </li>
                         <li className="no-menu">
-                            <a href="parameter-item" title="Shop List Page" className="sfActive">
+                            <a href="/shop-lists" title="Shop List Page" className="sfActive">
                                 <i className="glyph-icon icon-linecons-database"></i>
                                 <span>Shop List</span>
                             </a>
