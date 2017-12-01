@@ -6,7 +6,6 @@ import {loginUserSuccess} from './auth/actions';
 import App from './App';
 import {requireAuthentication} from './components/AuthenticatedComponent';
 import LoginPage from './auth/LoginPage'
-import PrincipalPage from './principal/Page'
 import HomePage from './home'
 import './index.css';
 import store from "./store"
@@ -24,9 +23,9 @@ ReactDOM.render(
             <Route component={App}>
                 <Route path="/login" component={LoginPage}/>
                 <Route path="/" component={requireAuthentication(HomePage)}/>
-                <Route path="/recipes" component={requireAuthentication(PrincipalPage)}/>
-                <Route path="/ingredients" component={requireAuthentication(PrincipalPage)}/>
-                <Route path="/shop-lists" component={requireAuthentication(PrincipalPage)}/>
+                <Route path="/recipes" component={requireAuthentication(HomePage)}/>
+                <Route path="/ingredients" component={requireAuthentication(HomePage)}/>
+                <Route path="/shop-lists" component={requireAuthentication(HomePage)}/>
             </Route>
         </Router>
     </Provider>, app

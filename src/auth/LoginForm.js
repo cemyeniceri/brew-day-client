@@ -1,5 +1,6 @@
-import React from 'react'
-import {Field, reduxForm} from 'redux-form'
+import React from 'react';
+import {Field, reduxForm} from 'redux-form';
+import { Link } from 'react-router';
 
 
 const renderFieldForLogin = ({input, label, placeHolder, type, meta: {touched, error, warning}}) => (
@@ -25,7 +26,7 @@ const validate = values => {
 };
 
 const LoginForm = (props) => {
-    const {handleSubmit, submitting} = props;
+    const {handleSubmit, submitting, onCreateUser} = props;
     return (
         <form onSubmit={handleSubmit}>
             <div className="content-box">
@@ -38,7 +39,7 @@ const LoginForm = (props) => {
                         <small>Login to your account.</small>
                     </span>
                     <span className="header-buttons">
-                        <a href="#" className="btn btn-sm btn-primary" title="">Sign Up</a>
+                        <Link className="btn btn-sm btn-primary" title="Register" onClick={() => onCreateUser()}>Sign Up</Link>
                     </span>
                 </h3>
                 <div className="content-box-wrapper">
@@ -53,7 +54,7 @@ const LoginForm = (props) => {
                         </div>
                     </div>
                     <div className="form-group">
-                        <a href="" title="Recover password">Forgot Your Password?</a>
+                        <Link to="/forgot-password" title="Recover password">Forgot Your Password?</Link>
                     </div>
                     <button className="btn btn-success btn-block" type="submit" disabled={submitting}>Submit</button>
                 </div>

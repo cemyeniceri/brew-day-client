@@ -2,19 +2,31 @@ import React from "react"
 import {connect} from "react-redux"
 import LoginForm from "./LoginForm"
 import {loginUser} from "./actions"
+import { Link } from 'react-router';
+import UserCreateDialog from '../userCreateDialog/UserCreateDialog'
+import {openCreateUserDialog} from "../userCreateDialog/actions";
 
 class LoginPage extends React.Component {
     componentWillMount() {
+
     }
 
     handleSubmit = (loginForm) => {
         this.props.loginUser(loginForm)
     };
 
+    openCreateUserDialog() {
+        this.props.openCreateUserDialog();
+    }
+
     render() {
 
         return (
             <div className="login-page">
+
+                {/* CREATE NEW USER */}
+                <UserCreateDialog />
+
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <div className="center-vertical">
                     <div className="center-content row">
@@ -35,22 +47,22 @@ class LoginPage extends React.Component {
                                             Prepare Your Receipts
                                         </li>
                                         <li className="pad10A font-size-16">
-                                            <i className="glyph-icon icon-shopping-cart mrg10R font-green"></i>
-                                            Make Your Shop Lists
-                                        </li>
-                                        <li className="pad10A font-size-16">
                                             <i className="glyph-icon icon-cubes mrg10R font-green"></i>
                                             Save Your Ingredients
+                                        </li>
+                                        <li className="pad10A font-size-16">
+                                            <i className="glyph-icon icon-shopping-cart mrg10R font-green"></i>
+                                            Make Your Shop Lists
                                         </li>
                                     </ul>
                                     <div className="divider"></div>
                                     Not a member yet?
-                                    <a href="" title="Register"> Click here to sign up</a>
+                                    <Link title="Register" onClick={() => this.openCreateUserDialog()}> Click here to sign up</Link>
                                 </div>
 
                                 {/*Login Form*/}
                                 <div className="col-md-7">
-                                    <LoginForm onSubmit={this.handleSubmit.bind(this)}/>
+                                    <LoginForm onSubmit={this.handleSubmit.bind(this)} onCreateUser={this.openCreateUserDialog.bind(this)}/>
                                 </div>
                             </div>
                         </div>
@@ -63,5 +75,8 @@ class LoginPage extends React.Component {
 
 export default connect(
     null,
-    {loginUser}
+    {
+        loginUser,
+        openCreateUserDialog
+    }
 )(LoginPage)
