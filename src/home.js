@@ -20,13 +20,13 @@ class Home extends React.Component {
                         </Link>
                     </li>
                     <li className="pad10A font-size-16">
-                        <Link to="/shop-lists">
+                        <Link to="/ingredients">
                             <i className="glyph-icon icon-cubes mrg10R font-green"></i>
                             Save Your Ingredients
                         </Link>
                     </li>
                     <li className="pad10A font-size-16">
-                        <Link to="/ingredients">
+                        <Link to="/shop-lists">
                             <i className="glyph-icon icon-shopping-cart mrg10R font-green"></i>
                             Make Your Shop Lists
                         </Link>
