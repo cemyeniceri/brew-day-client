@@ -16,7 +16,6 @@ const ingredientReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case RECEIVE_INGREDIENTS: {
-            debugger;
             state = {
                 ...state,
                 isUpdate: false,

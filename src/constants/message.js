@@ -14,3 +14,17 @@ export const INGREDIENT_CREATE_SUCCESS  = 'Ingredient is created successfully';
 export const INGREDIENT_UPDATE_SUCCESS  = 'Ingredient is updated successfully';
 export const INGREDIENT_DELETE_SUCCESS  = 'Ingredient is deleted successfully';
 export const QUESTION_DELETE_INGREDIENT = 'Do you really want to delete selected ingredient?';
+
+// Recipes Messages :
+export const RECIPE_CREATE_SUCCESS  = 'Recipe is created successfully';
+export const RECIPE_UPDATE_SUCCESS  = 'Recipe is updated successfully';
+export const RECIPE_DELETE_SUCCESS  = 'Recipe is deleted successfully';
+export const QUESTION_DELETE_RECIPE = 'Do you really want to delete selected recipe?';
+export const RECIPE_INGREDIENT_CREATE_SUCCESS  = 'Recipe ingredient is created successfully';
+export const RECIPE_INGREDIENT_UPDATE_SUCCESS  = 'Recipe ingredient is updated successfully';
+export const RECIPE_INGREDIENT_DELETE_SUCCESS  = 'Recipe ingredient is deleted successfully';
+export const QUESTION_DELETE_RECIPE_INGREDIENT = 'Do you really want to delete selected recipe ingredient?';
+export const COMMENT_CREATE_SUCCESS  = 'Comment is created successfully';
+export const COMMENT_UPDATE_SUCCESS  = 'Comment is updated successfully';
+export const COMMENT_DELETE_SUCCESS  = 'Comment is deleted successfully';
+export const QUESTION_DELETE_COMMENT = 'Do you really want to delete selected comment?';

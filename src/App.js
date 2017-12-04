@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux"
 import {logoutAndRedirect} from "./auth/actions"
 import AlertContainer from "./container/AlertContainer"
+import LoadingPage from "./components/loadingPage/loadingPage"
 import './App.css';
 
 class App extends Component {
@@ -66,6 +67,7 @@ class App extends Component {
 
         return (
             <div>
+                <LoadingPage />
                 {isAuthenticated ?
                     <div>
                         <div id="page-wrapper">

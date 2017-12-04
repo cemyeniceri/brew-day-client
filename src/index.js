@@ -9,6 +9,8 @@ import LoginPage from './auth/LoginPage'
 import HomePage from './home'
 import PageIngredient from './ingredient/PageIngredient'
 import PageIngredientAdd from './ingredient/PageIngredientAdd'
+import PageRecipe from './recipes/PageRecipe'
+import PageRecipeAdd from './recipes/PageRecipeAdd'
 import './index.css';
 import store from "./store"
 
@@ -25,10 +27,12 @@ ReactDOM.render(
             <Route component={App}>
                 <Route path="/login" component={LoginPage}/>
                 <Route path="/" component={requireAuthentication(HomePage)}/>
-                <Route path="/recipes" component={requireAuthentication(HomePage)}/>
                 <Route path="/ingredients" component={requireAuthentication(PageIngredient)}/>
                 <Route path="/ingredients/:ingredientObjId" component={requireAuthentication(PageIngredientAdd)}/>
+                <Route path="/recipes" component={requireAuthentication(PageRecipe)}/>
+                <Route path="/recipes/:recipeObjId" component={requireAuthentication(PageRecipeAdd)}/>
                 <Route path="/shop-lists" component={requireAuthentication(HomePage)}/>
+                <Route path="/shop-lists/:shopObjId" component={requireAuthentication(HomePage)}/>
             </Route>
         </Router>
     </Provider>, app

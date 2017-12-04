@@ -19,6 +19,18 @@ export const renderField = ({input, label, placeHolder, type, meta: {touched, er
     </div>
 );
 
+export const renderTextArea = ({input, label, placeHolder, readOnly, type, meta: {touched, error, warning}}) => (
+    <div className="form-group">
+        <label className="col-sm-3 control-label">{label}</label>
+        <div className="col-sm-9">
+            <textarea {...input} placeholder={placeHolder} type={type} readOnly={readOnly}
+                   className={"form-control " + ((touched && error) ? "parsley-error" : '')}/>
+            {touched && ((error && errorContainer(error)
+            ) || (warning && <li>{warning}</li>))}
+        </div>
+    </div>
+);
+
 export const customSelect = (props) => (
     <div className="form-group">
         <label className="col-sm-3 control-label">{props.label}</label>
