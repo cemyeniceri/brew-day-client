@@ -11,6 +11,8 @@ import PageIngredient from './ingredient/PageIngredient'
 import PageIngredientAdd from './ingredient/PageIngredientAdd'
 import PageRecipe from './recipes/PageRecipe'
 import PageRecipeAdd from './recipes/PageRecipeAdd'
+import PageShopList from './shoplist/PageShopList'
+import PageShopListAdd from './shoplist/PageShopListAdd'
 import './index.css';
 import store from "./store"
 
@@ -31,8 +33,8 @@ ReactDOM.render(
                 <Route path="/ingredients/:ingredientObjId" component={requireAuthentication(PageIngredientAdd)}/>
                 <Route path="/recipes" component={requireAuthentication(PageRecipe)}/>
                 <Route path="/recipes/:recipeObjId" component={requireAuthentication(PageRecipeAdd)}/>
-                <Route path="/shop-lists" component={requireAuthentication(HomePage)}/>
-                <Route path="/shop-lists/:shopObjId" component={requireAuthentication(HomePage)}/>
+                <Route path="/shop-lists" component={requireAuthentication(PageShopList)}/>
+                <Route path="/shop-lists/:shopObjId" component={requireAuthentication(PageShopListAdd)}/>
             </Route>
         </Router>
     </Provider>, app

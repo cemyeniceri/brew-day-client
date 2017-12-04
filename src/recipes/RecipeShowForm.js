@@ -2,8 +2,8 @@ import React from 'react'
 import {reduxForm} from 'redux-form'
 import {Button, ButtonToolbar} from "react-bootstrap"
 import RecipeDescriptionForm from './subForms/RecipeDescriptionForm';
-import RecipeIngredientList from './subForms/RecipeIngredientList';
-import RecipeIngredientAddForm from './subForms/RecipeIngredientAddForm';
+import IngredientList from '../ingredientCommon/IngredientList';
+import IngredientAddDialog from '../ingredientCommon/IngredientAddDialog';
 import RecipeCommentList from './subForms/RecipeCommentList';
 import RecipeCommentAddForm from './subForms/RecipeCommentAddForm'
 
@@ -44,15 +44,15 @@ let RecipeShowForm = (props) => {
                     />
 
                     <hr/>
-                    <RecipeIngredientAddForm initialValues={selectedIngredient}
-                                             isShowing={isShownIngredientForm}
-                                             onSubmit={handleSaveIngredient}
-                                             handleCancel={handleCancelSaveIngredient}
+                    <IngredientAddDialog initialValues={selectedIngredient}
+                                         isShowing={isShownIngredientForm}
+                                         onSubmit={handleSaveIngredient}
+                                         handleCancel={handleCancelSaveIngredient}
                     />
-                    <RecipeIngredientList ingredients={ingredients}
-                                          handleCreateIngredient={handleCreateIngredient}
-                                          handleEditIngredient={handleEditIngredient}
-                                          handleDeleteIngredient={handleDeleteIngredient}
+                    <IngredientList ingredients={ingredients}
+                                    handleCreateIngredient={handleCreateIngredient}
+                                    handleEditIngredient={handleEditIngredient}
+                                    handleDeleteIngredient={handleDeleteIngredient}
                     />
 
                     <br/><hr/>

@@ -5,6 +5,7 @@ import authReducer from "./auth/reducer"
 import userReducer from "./userCreateDialog/reducer"
 import ingredientReducer from "./ingredient/reducer";
 import recipeReducer from './recipes/reducer';
+import shopListReducer from './shoplist/reducer';
 import commons from "./common/reducer"
 import confirmationReducer from "./components/confirmationDialog/reducer"
 import loadingPageReducer from "./components/loadingPage/reducer"
@@ -15,6 +16,7 @@ export default combineReducers({
     userReducer,
     ingredientReducer,
     recipeReducer,
+    shopListReducer,
     commons,
     confirmationReducer,
     loadingPageReducer

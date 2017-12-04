@@ -1,6 +1,6 @@
 import React from "react"
 import {connect} from "react-redux"
-import {Link} from 'react-router'
+import {Link, browserHistory} from 'react-router'
 import {
     fetchIngredients,
     deleteIngredient,
@@ -9,9 +9,8 @@ import {
     cancelFromDelete,
     askForDelete
 } from "./actions"
-import IngredientsList from "./IngredientList"
+import IngredientsList from "../ingredientCommon/IngredientList"
 import ConfirmationForm from "../components/confirmationDialog/ConfirmationDialogForm"
-import ingredientReducer from "./reducer";
 
 class PageParameter extends React.Component {
     componentWillMount() {
@@ -26,8 +25,9 @@ class PageParameter extends React.Component {
         this.props.createIngredientStart();
     };
 
-    onUpdate = () => {
+    onUpdate = (ingredient) => {
         this.props.updateIngredientStart();
+        browserHistory.push('/ingredients/' + ingredient.objId);
     };
 
     onAskForDelete = (objId) => {
@@ -50,10 +50,15 @@ class PageParameter extends React.Component {
                         <Link to={"/ingredients/new"} className="btn btn-primary float-right" onClick={() => this.onCreate()}>Create</Link>
                     </div>
                 </div>
-                <IngredientsList ingredients={this.props.ingredients}
-                                 updateIngredient={this.onUpdate.bind(this)}
-                                 deleteIngredient={this.onAskForDelete.bind(this)}
-                />
+                <br/>
+                <div className="panel">
+                    <div className="panel-body">
+                        <IngredientsList ingredients={this.props.ingredients}
+                                         handleEditIngredient={this.onUpdate.bind(this)}
+                                         handleDeleteIngredient={this.onAskForDelete.bind(this)}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }

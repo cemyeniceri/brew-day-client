@@ -81,7 +81,8 @@ const recipeReducer = (state = initialState, action) => {
         case RECIPE_CREATE_START: {
             state = {
                 ...state,
-                isRecipeUpdate: false
+                isRecipeUpdate: false,
+                initialValues: null
             };
             break;
         }

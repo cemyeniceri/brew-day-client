@@ -32,11 +32,13 @@ export const RECEIVE_INGREDIENT  = 'RECEIVE_INGREDIENT';
 export const INGREDIENT_CREATE_START = 'INGREDIENT_CREATE_START';
 export const INGREDIENT_UPDATE_START = 'INGREDIENT_UPDATE_START';
 
-// ###################### RECIPE PAGE : ######################
-/* TYPES */
+// TYPES :
 export const TYPE_RECIPE = 'recipe';
+export const TYPE_SHOP_LIST = 'shop-list';
 export const TYPE_INGREDIENT = 'ingredient';
 export const TYPE_COMMENT = 'comment';
+
+// ###################### RECIPE PAGE : ######################
 /* Recipe Part */
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES';
 export const RECEIVE_RECIPE = 'RECEIVE_RECIPE';
@@ -55,4 +57,19 @@ export const RECEIVE_RECIPE_COMMENTS = 'RECEIVE_RECIPE_COMMENTS';
 export const RECIPE_COMMENT_UPDATE_START = 'COMMENT_UPDATE_START';
 export const RECIPE_COMMENT_CREATE_START = 'COMMENT_CREATE_START';
 export const CLEAR_SAVING_RECIPE_COMMENT = 'CLEAR_SAVING_RECIPE_COMMENT';
+// ###########################################################
+
+// ##################### SHOP-LIST PAGE : ####################
+/* Shop List Part */
+export const RECEIVE_SHOP_LISTS = 'RECEIVE_SHOP_LISTS';
+export const RECEIVE_SHOP_LIST = 'RECEIVE_SHOP_LIST';
+export const RECEIVE_SHOP_LIST_FOR_UPDATE = 'RECEIVE_SHOP_LIST_FOR_UPDATE';
+export const SHOP_LIST_UPDATE_START = 'SHOP_LIST_UPDATE_START';
+export const SHOP_LIST_CREATE_START = 'SHOP_LIST_CREATE_START';
+export const CLEAR_SELECTED_SHOP_LIST = 'CLEAR_SELECTED_SHOP_LIST';
+/* Ingredient Part */
+export const RECEIVE_SHOP_LIST_INGREDIENTS = 'RECEIVE_SHOP_LIST_INGREDIENTS';
+export const SHOP_LIST_INGREDIENT_UPDATE_START = 'SHOP_LIST_INGREDIENT_UPDATE_START';
+export const SHOP_LIST_INGREDIENT_CREATE_START = 'SHOP_LIST_INGREDIENT_CREATE_START';
+export const CLEAR_SAVING_SHOP_LIST_INGREDIENT = 'CLEAR_SAVING_SHOP_LIST_INGREDIENT';
 // ###########################################################

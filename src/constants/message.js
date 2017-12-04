@@ -1,6 +1,6 @@
 // Page Validation Errors:
 export const VALUE_IS_REQUIRED = 'This value is required.';
-export const VALUE_MUST_SELECTED = 'This value must be selected.';
+export const VALUE_IS_INVALID  = 'This value is not valid!';
 export const MUST_BE_15_CHAR_OR_LESS = 'Must be 15 characters or less';
 export const MUST_BE_BETWEEN_6_15_CHAR = 'Must be greater than 6 and less than 15 characters';
 export const INVALID_EMAIL = 'Invalid email address.';
@@ -28,3 +28,13 @@ export const COMMENT_CREATE_SUCCESS  = 'Comment is created successfully';
 export const COMMENT_UPDATE_SUCCESS  = 'Comment is updated successfully';
 export const COMMENT_DELETE_SUCCESS  = 'Comment is deleted successfully';
 export const QUESTION_DELETE_COMMENT = 'Do you really want to delete selected comment?';
+
+// ShopList Messages:
+export const SHOP_LIST_CREATE_SUCCESS  = 'Shop list is created successfully';
+export const SHOP_LIST_UPDATE_SUCCESS  = 'Shop list is updated successfully';
+export const SHOP_LIST_DELETE_SUCCESS  = 'Shop list is deleted successfully';
+export const QUESTION_DELETE_SHOP_LIST = 'Do you really want to delete selected shop list?';
+export const SHOP_LIST_INGREDIENT_CREATE_SUCCESS  = 'Shop list ingredient is created successfully';
+export const SHOP_LIST_INGREDIENT_UPDATE_SUCCESS  = 'Shop list ingredient is updated successfully';
+export const SHOP_LIST_INGREDIENT_DELETE_SUCCESS  = 'Shop list ingredient is deleted successfully';
+export const QUESTION_DELETE_SHOP_LIST_INGREDIENT = 'Do you really want to delete selected shop list ingredient?';

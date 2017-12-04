@@ -9,7 +9,7 @@ let SelectRecipeComboBox = (props) => {
     return (
         <div className="row">
             <div className="col-md-6">
-                <Field name="recipe" type="text" component={customSelect} options={recipes} label="* Recipe" placeHolder="Type" onChangeFunction={handleSelectRecipe}/>
+                <Field name="recipe" type="text" component={customSelect} options={recipes} label="* Recipe" placeHolder="Recipe" onChangeFunction={handleSelectRecipe}/>
             </div>
             <div className="col-md-6">
                 <Button bsStyle="info" className="float-right" type="button" disabled={!selectedRecipe} onClick={() => handleCheckAvailability()}>Check Ingredients</Button>

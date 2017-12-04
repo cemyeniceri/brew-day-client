@@ -148,7 +148,8 @@ class PageRecipe extends React.Component {
                 </div>
                 <div className="panel">
                     <div className="panel-body">
-                        <SelectRecipeComboBox recipes={this.props.recipes}
+                        <SelectRecipeComboBox initialValues={this.props.selectedRecipe ? {recipe: this.props.selectedRecipe.objId} : {recipe: null}}
+                                              recipes={this.props.recipes}
                                               selectedRecipe={this.props.selectedRecipe}
                                               handleSelectRecipe={this.onSelectRecipe.bind(this)}
                                               handleCheckAvailability={this.onAvailabilityControl.bind(this)} />

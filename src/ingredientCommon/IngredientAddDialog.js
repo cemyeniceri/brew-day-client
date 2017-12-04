@@ -1,6 +1,6 @@
 import React from "react"
 import { Modal } from "react-bootstrap"
-import IngredientAddForm from '../../ingredient/IngredientAddForm'
+import IngredientAddForm from '../ingredient/IngredientAddForm'
 
 const RecipeIngredientAddForm = (props) => {
 

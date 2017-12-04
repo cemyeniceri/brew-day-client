@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form'
 import {Button, ButtonToolbar} from "react-bootstrap"
 import {customSelect, renderField} from "../common/fields"
 
-import {VALUE_IS_REQUIRED} from "../constants/message";
+import {VALUE_IS_REQUIRED, VALUE_IS_INVALID} from "../constants/message";
 
 const validate = values => {
     const errors = {};
@@ -18,8 +18,14 @@ const validate = values => {
     }
     if (!values.amount) {
         errors.amount = VALUE_IS_REQUIRED;
+    } else {
+        const isNumber = (values.amount != null) && (values.amount.match(/^-?\d*(\.\d+)?$/));
+        if(!isNumber) {
+            errors.amount = VALUE_IS_INVALID;
+        }
     }
-    return errors
+
+    return errors;
 };
 
 let IngredientAddForm = (props) => {

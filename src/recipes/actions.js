@@ -84,8 +84,8 @@ export const createRecipe = (recipe) => dispatch => {
 export const updateRecipe = (recipe) => dispatch => {
     axiosInstance.put(BASE_URL + 'recipes', JSON.stringify(recipe))
         .then(() => {
-            dispatch({type: CLEAR_SELECTED_RECIPE});
             dispatch({type: SHOW_SUCCESS_ALERT, payload: RECIPE_UPDATE_SUCCESS});
+            dispatch(fetchRecipe(recipe.objId));
             browserHistory.push('/recipes');
     });
 };

@@ -49,10 +49,15 @@ const RecipeIngredientList = (props) => {
                     </h3>
                 </div>
                 <div className="col-md-6">
+                {
+                    handleCreateIngredient !== undefined ?
                     <button className="btn btn-primary btn-sm float-right" onClick={() => handleCreateIngredient()}>
                         <i className="glyph-icon icon-plus-circle"></i>
-                    </button>
+                    </button>:
+                    ""
+                }
                 </div>
+
             </div>
             <div>
                 {tableInstance}
