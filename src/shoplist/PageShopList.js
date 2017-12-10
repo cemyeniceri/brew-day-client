@@ -10,6 +10,8 @@ import {
     updateShopListStart,
     createShopListStart,
     askForDeleteShopList,
+    askForDoneShopList,
+    doneShopList,
     /* Ingredient */
     startUpdateShopListIngredient,
     startCreateShopListIngredient,
@@ -24,7 +26,7 @@ import {
 import ConfirmationForm from '../components/confirmationDialog/ConfirmationDialogForm'
 import SelectShopListComboBox from './subForms/SelectShopListComboBox'
 import ShopListShowForm from './ShopListShowForm';
-import {TYPE_SHOP_LIST, TYPE_INGREDIENT} from "../constants";
+import {TYPE_SHOP_LIST, TYPE_INGREDIENT, TYPE_SHOP_LIST_DONE} from "../constants";
 
 class PageShopList extends React.Component {
     componentWillMount() {
@@ -48,6 +50,10 @@ class PageShopList extends React.Component {
 
     onAskForDeleteSelectedShopList = (objId) => {
         this.props.askForDeleteShopList(objId);
+    };
+
+    onAskForDoneSelectedShopList = () => {
+        this.props.askForDoneShopList(this.props.selectedShopList.objId);
     };
 
     /* Ingredient Operations */
@@ -77,11 +83,13 @@ class PageShopList extends React.Component {
 
 
     /* ALL */
-    onDeleteSelectedItem = (confirmationParameters) => {
+    onConfirmationDialogSubmit = (confirmationParameters) => {
         if(confirmationParameters.type === TYPE_SHOP_LIST)
             this.props.deleteShopList(this.props.selectedShopList.objId);
         else if(confirmationParameters.type === TYPE_INGREDIENT)
             this.props.deleteSelectedShopListIngredient(this.props.selectedShopList.objId, confirmationParameters.objId);
+        else if(confirmationParameters.type === TYPE_SHOP_LIST_DONE)
+            this.props.doneShopList(this.props.selectedShopList.objId);
     };
 
     onHideModal = () => {
@@ -94,7 +102,7 @@ class PageShopList extends React.Component {
                 <div id="page-title">
                     <h2>Shop Lists</h2>
                 </div>
-                <ConfirmationForm onConfirm={this.onDeleteSelectedItem.bind(this)} onCancel={this.onHideModal.bind(this)} />
+                <ConfirmationForm onConfirm={this.onConfirmationDialogSubmit.bind(this)} onCancel={this.onHideModal.bind(this)} />
                 <div className="example-box-wrapper">
                     <div className="row">
                         <ButtonToolbar className="float-right">
@@ -108,6 +116,8 @@ class PageShopList extends React.Component {
                         <SelectShopListComboBox initialValues={this.props.selectedShopList ? {shopList: this.props.selectedShopList.objId} : {shopList: null}}
                                                 shopLists={this.props.shopLists}
                                                 handleSelectShopList={this.onSelectShopList.bind(this)}
+                                                selectedShopList={this.props.selectedShopList}
+                                                handleDoneShopList={this.onAskForDoneSelectedShopList.bind(this)}
                         />
 
                         <ShopListShowForm selectedShopList={this.props.selectedShopList}
@@ -152,6 +162,8 @@ export default connect(
         updateShopListStart,
         createShopListStart,
         askForDeleteShopList,
+        askForDoneShopList,
+        doneShopList,
         /* Ingredient */
         startUpdateShopListIngredient,
         startCreateShopListIngredient,

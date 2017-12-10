@@ -35,6 +35,7 @@ export const INGREDIENT_UPDATE_START = 'INGREDIENT_UPDATE_START';
 // TYPES :
 export const TYPE_RECIPE = 'recipe';
 export const TYPE_SHOP_LIST = 'shop-list';
+export const TYPE_SHOP_LIST_DONE = 'shop-list-done';
 export const TYPE_INGREDIENT = 'ingredient';
 export const TYPE_COMMENT = 'comment';
 

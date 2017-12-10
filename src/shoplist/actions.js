@@ -7,6 +7,7 @@ import  {
     HIDE_CONFIRMATION_DIALOG,
     /* TYPES */
     TYPE_SHOP_LIST,
+    TYPE_SHOP_LIST_DONE,
     TYPE_INGREDIENT,
     /* Shop List Part */
     RECEIVE_SHOP_LISTS,
@@ -27,7 +28,9 @@ import {
     SHOP_LIST_CREATE_SUCCESS,
     SHOP_LIST_UPDATE_SUCCESS,
     SHOP_LIST_DELETE_SUCCESS,
+    SHOP_LIST_COMPLETE_SUCCESS,
     QUESTION_DELETE_SHOP_LIST,
+    QUESTION_DONE_SHOP_LIST,
     /* Ingredient Messages */
     SHOP_LIST_INGREDIENT_CREATE_SUCCESS,
     SHOP_LIST_INGREDIENT_UPDATE_SUCCESS,
@@ -97,6 +100,20 @@ export const deleteShopList = (objId) => dispatch => {
 
 export const askForDeleteShopList = (objId) => dispatch => {
     dispatch({ type: SHOW_CONFIRMATION_DIALOG, message: QUESTION_DELETE_SHOP_LIST, confirmationParameters: {type: TYPE_SHOP_LIST, objId: objId}});
+};
+
+export const askForDoneShopList = (objId) => dispatch => {
+    dispatch({ type: SHOW_CONFIRMATION_DIALOG, message: QUESTION_DONE_SHOP_LIST, confirmationParameters: {type: TYPE_SHOP_LIST_DONE, objId: objId}});
+};
+
+export const doneShopList = (objId) => dispatch => {
+    axiosInstance.get(BASE_URL + 'shop-lists/' + objId + '/done')
+        .then(() => {
+            dispatch(fetchShopLists());
+            dispatch({type: CLEAR_SELECTED_SHOP_LIST});
+            dispatch({type: SHOW_SUCCESS_ALERT, payload: SHOP_LIST_COMPLETE_SUCCESS});
+            dispatch({type: HIDE_CONFIRMATION_DIALOG});
+        })
 };
 
 
