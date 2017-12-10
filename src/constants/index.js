@@ -79,3 +79,8 @@ export const SHOP_LIST_INGREDIENT_UPDATE_START = 'SHOP_LIST_INGREDIENT_UPDATE_ST
 export const SHOP_LIST_INGREDIENT_CREATE_START = 'SHOP_LIST_INGREDIENT_CREATE_START';
 export const CLEAR_SAVING_SHOP_LIST_INGREDIENT = 'CLEAR_SAVING_SHOP_LIST_INGREDIENT';
 // ###########################################################
+
+// ################ TODAY'S BREW LIST DIALOG : ###############
+export const OPEN_BREW_LIST_DIALOG  = 'OPEN_BREW_LIST_DIALOG';
+export const CLOSE_BREW_LIST_DIALOG = 'CLOSE_BREW_LIST_DIALOG';
+// ###########################################################

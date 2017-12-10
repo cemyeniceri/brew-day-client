@@ -1,6 +1,6 @@
 import React from "react"
 import {Table} from "react-bootstrap"
-import {Field, reduxForm} from 'redux-form'
+import {Field} from 'redux-form'
 import {renderField} from "../common/fields";
 
 const IngredientList = (props) => {

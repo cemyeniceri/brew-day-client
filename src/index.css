@@ -31,3 +31,9 @@ table, th, td {
     margin-top: -40px;
     background: url(/images/loader-dark.gif) no-repeat;
 }
+
+.row-hover:hover  {
+    color: black;
+    background-color: lightcyan;
+    cursor: pointer;
+}
