@@ -14,12 +14,15 @@ let RecipeShowForm = (props) => {
         selectedIngredient,
         selectedComment,
         ingredients,
+        availableIngredients,
         comments,
         isShownIngredientForm,
         isShownCommentForm,
 
         /* Actions */
         handleDeleteRecipe,
+        isShopListDoable,
+        handleCreateShopListFromRecipe,
 
         handleCreateIngredient,
         handleEditIngredient,
@@ -50,6 +53,7 @@ let RecipeShowForm = (props) => {
                                          handleCancel={handleCancelSaveIngredient}
                     />
                     <IngredientList ingredients={ingredients}
+                                    availableIngredients={availableIngredients}
                                     handleCreateIngredient={handleCreateIngredient}
                                     handleEditIngredient={handleEditIngredient}
                                     handleDeleteIngredient={handleDeleteIngredient}
@@ -70,6 +74,7 @@ let RecipeShowForm = (props) => {
                     <br/><br/><hr/>
                     <div className="float-right">
                         <ButtonToolbar>
+                            <Button bsStyle="info" type="button" onClick={() => handleCreateShopListFromRecipe()} disabled={!isShopListDoable}>Create Shop List</Button>
                             <Button bsStyle="danger" type="button" onClick={() => handleDeleteRecipe()}>Delete All Recipe Content</Button>
                         </ButtonToolbar>
                     </div>

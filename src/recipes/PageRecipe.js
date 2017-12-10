@@ -10,7 +10,12 @@ import {
     updateRecipeStart,
     createRecipeStart,
     askForDeleteRecipe,
+    /*Check Ingredients and Create Shop List*/
     checkForIngredientAvailability,
+    openCreateShopListDialog,
+    deleteIngredientFromRecipeShopList,
+    saveRecipeShopList,
+    cancelFromCreateShopList,
     /* Ingredient */
     startUpdateRecipeIngredient,
     startCreateRecipeIngredient,
@@ -33,6 +38,7 @@ import {
 import ConfirmationForm from '../components/confirmationDialog/ConfirmationDialogForm'
 import SelectRecipeComboBox from './subForms/SelectRecipeComboBox'
 import RecipeShowForm from './RecipeShowForm';
+import CreateShopListFromRecipeDialog from './CreateShopListFromRecipeDialog'
 import {TYPE_RECIPE, TYPE_INGREDIENT, TYPE_COMMENT} from "../constants";
 
 class PageRecipe extends React.Component {
@@ -43,10 +49,6 @@ class PageRecipe extends React.Component {
     /* Recipe Operations */
     onSelectRecipe(selectedRecipe) {
         this.props.fetchRecipe(selectedRecipe.value);
-    };
-
-    onAvailabilityControl() {
-        this.props.checkForIngredientAvailability(this.props.selectedRecipe.objId);
     };
 
     onCreateRecipeStart = () => {
@@ -62,6 +64,24 @@ class PageRecipe extends React.Component {
     onAskForDeleteSelectedRecipe = (objId) => {
         this.props.askForDeleteRecipe(objId);
     };
+
+    /* Available Ingredients Check And Create ShopList From Recipe Dialog Methods */
+    onAvailabilityControl() {
+        this.props.checkForIngredientAvailability(this.props.selectedRecipe.objId);
+    };
+
+    onOpenCreateShopListFromRecipeDialog = () => {
+        this.props.openCreateShopListDialog();
+    };
+
+    onSaveShopListFromRecipe = (formValues) => {
+        this.props.saveRecipeShopList(formValues, this.props.shopListFromRecipe);
+    };
+
+    onCancelFromCreateShopListFromRecipe = () => {
+        this.props.cancelFromCreateShopList();
+    };
+
 
     /* Ingredient Operations */
     onCreateRecipeIngredient = () => {
@@ -152,7 +172,8 @@ class PageRecipe extends React.Component {
                                               recipes={this.props.recipes}
                                               selectedRecipe={this.props.selectedRecipe}
                                               handleSelectRecipe={this.onSelectRecipe.bind(this)}
-                                              handleCheckAvailability={this.onAvailabilityControl.bind(this)} />
+                                              handleCheckAvailability={this.onAvailabilityControl.bind(this)}
+                        />
 
                         <RecipeShowForm selectedRecipe={this.props.selectedRecipe}
                                         ingredients={this.props.ingredients}
@@ -160,6 +181,7 @@ class PageRecipe extends React.Component {
                                         isShownIngredientForm={this.props.isShownIngredientForm}
                                         isShownCommentForm={this.props.isShownCommentForm}
                                         handleDeleteRecipe={this.onAskForDeleteSelectedRecipe.bind(this)}
+                                        handleCreateShopListFromRecipe={this.onOpenCreateShopListFromRecipeDialog.bind(this)}
 
                                         selectedIngredient={this.props.selectedIngredient}
                                         handleCreateIngredient={this.onCreateRecipeIngredient.bind(this)}
@@ -167,6 +189,8 @@ class PageRecipe extends React.Component {
                                         handleSaveIngredient={this.onSaveRecipeIngredient.bind(this)}
                                         handleCancelSaveIngredient={this.onCancelSaveRecipeIngredient.bind(this)}
                                         handleDeleteIngredient={this.onDeleteRecipeIngredient.bind(this)}
+                                        availableIngredients={this.props.availableIngredients}
+                                        isShopListDoable={this.props.isShopListDoable}
 
                                         selectedComment={this.props.selectedComment}
                                         handleCreateComment={this.onCreateRecipeComment.bind(this)}
@@ -174,6 +198,16 @@ class PageRecipe extends React.Component {
                                         handleSaveComment={this.onSaveRecipeComment.bind(this)}
                                         handleCancelSaveComment={this.onCancelSaveRecipeComment.bind(this)}
                                         handleDeleteComment={this.onDeleteRecipeComment.bind(this)}
+                        />
+
+                        <CreateShopListFromRecipeDialog initialValues={this.props.shopListDialogInitValues}
+                                                        isShowing={this.props.isShownCreateRecipeDialog}
+                                                        shopList={this.props.shopListFromRecipe}
+                                                        handleCancel={this.onCancelFromCreateShopListFromRecipe.bind(this)}
+                                                        onSubmit={this.onSaveShopListFromRecipe.bind(this)}
+                                                        createIngredient={(ingredient) => this.props.createIngredientForRecipeShopList(ingredient)}
+                                                        deleteIngredient={(objId) => this.props.deleteIngredientFromRecipeShopList(objId)}
+
                         />
                     </div>
                 </div>
@@ -183,11 +217,16 @@ class PageRecipe extends React.Component {
     }
 }
 
-const mapStateToProps = ({recipeReducer:{initialValues, recipes, selectedRecipe, ingredients, selectedIngredient, isIngredientUpdate, isShownIngredientForm, comments, selectedComment, isCommentUpdate, isShownCommentForm}}) => ({
+const mapStateToProps = ({recipeReducer:{recipes, selectedRecipe, availableIngredients, shopListFromRecipe, shopListDialogInitValues, isShopListDoable, isShownCreateRecipeDialog, ingredients, selectedIngredient, isIngredientUpdate, isShownIngredientForm, comments, selectedComment, isCommentUpdate, isShownCommentForm}}) => ({
     /* Recipe */
-    initialValues,
     recipes,
     selectedRecipe,
+    /* Check Ingredients and Create Shop List */
+    availableIngredients,
+    shopListFromRecipe,
+    shopListDialogInitValues,
+    isShopListDoable,
+    isShownCreateRecipeDialog,
     /* Ingredient */
     ingredients,
     selectedIngredient,
@@ -210,7 +249,12 @@ export default connect(
         updateRecipeStart,
         createRecipeStart,
         askForDeleteRecipe,
+        /*Check Ingredients and Create Shop List*/
         checkForIngredientAvailability,
+        openCreateShopListDialog,
+        deleteIngredientFromRecipeShopList,
+        saveRecipeShopList,
+        cancelFromCreateShopList,
         /* Ingredient */
         startUpdateRecipeIngredient,
         startCreateRecipeIngredient,

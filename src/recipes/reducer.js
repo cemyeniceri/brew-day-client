@@ -6,7 +6,12 @@ import  {
     RECIPE_UPDATE_START,
     RECIPE_CREATE_START,
     CLEAR_SELECTED_RECIPE,
+    /* Check Ingredient And Create Shop List From Recipe */
     CHECK_INGREDIENTS_AVAILABILITY,
+    OPEN_CREATE_SHOP_LIST_DIALOG,
+    DELETE_INGREDIENT_FROM_RECIPE_SHOP_LIST,
+    SAVE_RECIPE_SHOP_LIST,
+    CANCEL_CREATE_SHOP_LIST,
     /* Ingredient Part */
     RECEIVE_RECIPE_INGREDIENTS,
     RECIPE_INGREDIENT_UPDATE_START,
@@ -23,7 +28,15 @@ const initialState = {
     recipes: [],
     selectedRecipe: null,
     isRecipeUpdate: false,
-    AvailableIngredients: [],
+
+    availableIngredients: {},
+    shopListFromRecipe: {
+        name: null,
+        shopListIngredients: []
+    },
+    isShopListDoable: false,
+    shopListDialogInitValues: null,
+    isShownCreateRecipeDialog: false,
 
     ingredients: [],
     selectedIngredient: null,
@@ -56,7 +69,14 @@ const recipeReducer = (state = initialState, action) => {
         case RECEIVE_RECIPE: {
             state = {
                 ...state,
-                selectedRecipe: action.payload
+                selectedRecipe: action.payload,
+                availableIngredients: [],
+                shopListDialogInitValues: null,
+                shopListFromRecipe: {
+                    name: null,
+                    shopListIngredients: []
+                },
+                isShopListDoable: false
             };
             break;
         }
@@ -97,10 +117,91 @@ const recipeReducer = (state = initialState, action) => {
             break;
         }
 
+        /* Check Ingredients And Create Shop List From Recipe */
         case CHECK_INGREDIENTS_AVAILABILITY : {
+            let isDoable = false;
+            Object.values(action.payload).forEach(ingredient => {
+                if(ingredient.state === false) {
+                    isDoable = true;
+                }
+            });
+
             state = {
                 ...state,
-                AvailableIngredients: action.payload
+                availableIngredients: action.payload,
+                isShopListDoable: isDoable,
+                shopListDialogInitValues: null,
+                isShownCreateRecipeDialog: false
+            };
+            break;
+        }
+
+        case OPEN_CREATE_SHOP_LIST_DIALOG: {
+            // Create ShopList:
+            let tempShopList = {
+                name: state.selectedRecipe.name + ' Shop List',
+                shopListIngredients: []
+            };
+            let tempIngredientsInitState = {};
+            state.ingredients.forEach(ingredient => {
+                if(state.availableIngredients[ingredient.objId].state === false)
+                    tempShopList.shopListIngredients.push({
+                        ...ingredient,
+                        amount: state.availableIngredients[ingredient.objId].amount
+                    });
+                tempIngredientsInitState[ingredient.objId] = state.availableIngredients[ingredient.objId].amount;
+            });
+
+            // Set form initial values:
+
+
+            state = {
+                ...state,
+                shopListFromRecipe: tempShopList,
+                shopListDialogInitValues: {
+                    name: tempShopList.name,
+                    ...tempIngredientsInitState
+                },
+                isShownCreateRecipeDialog: true
+            };
+            break;
+        }
+
+        case DELETE_INGREDIENT_FROM_RECIPE_SHOP_LIST: {
+            const editedIngredientList = state.shopListFromRecipe.shopListIngredients.filter(ingredient =>
+                ingredient.objId !== action.payload
+            );
+            state = {
+                ...state,
+                shopListFromRecipe: {
+                    ...state.shopListFromRecipe,
+                    shopListIngredients: editedIngredientList
+                }
+            };
+            break;
+        }
+
+        case SAVE_RECIPE_SHOP_LIST: {
+            state = {
+                ...state,
+                shopListDialogInitValues: null,
+                isShownCreateRecipeDialog: false,
+                shopListFromRecipe: {
+                    name: null,
+                    shopListIngredients: []
+                },
+            };
+        }
+
+        case CANCEL_CREATE_SHOP_LIST: {
+            state = {
+                ...state,
+                shopListDialogInitValues: null,
+                isShownCreateRecipeDialog: false,
+                shopListFromRecipe: {
+                    name: null,
+                    shopListIngredients: []
+                },
             };
             break;
         }
@@ -110,7 +211,13 @@ const recipeReducer = (state = initialState, action) => {
         case RECEIVE_RECIPE_INGREDIENTS : {
             state = {
                 ...state,
-                ingredients: action.payload
+                ingredients: action.payload,
+                availableIngredients: [],
+                shopListFromRecipe: {
+                    name: null,
+                    shopListIngredients: []
+                },
+                isShopListDoable: false
             };
             break;
         }

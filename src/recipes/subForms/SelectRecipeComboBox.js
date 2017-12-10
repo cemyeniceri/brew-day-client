@@ -12,7 +12,7 @@ let SelectRecipeComboBox = (props) => {
                 <Field name="recipe" type="text" component={customSelect} options={recipes} label="* Recipe" placeHolder="Recipe" onChangeFunction={handleSelectRecipe}/>
             </div>
             <div className="col-md-6">
-                <Button bsStyle="info" className="float-right" type="button" disabled={!selectedRecipe} onClick={() => handleCheckAvailability()}>Check Ingredients</Button>
+                <Button bsStyle="info" className="float-right" type="button" disabled={!selectedRecipe} onClick={() => handleCheckAvailability()} data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip left">Check Ingredients</Button>
             </div>
         </div>
     )

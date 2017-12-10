@@ -1,6 +1,6 @@
 import axiosInstance from "../common/axiosInstance";
 import {browserHistory} from "react-router"
-import  {
+import {
     BASE_URL,
     SHOW_SUCCESS_ALERT,
     SHOW_CONFIRMATION_DIALOG,
@@ -16,7 +16,12 @@ import  {
     RECIPE_UPDATE_START,
     RECIPE_CREATE_START,
     CLEAR_SELECTED_RECIPE,
+    /* Check Ingredients And Create Shop List From Recipe */
     CHECK_INGREDIENTS_AVAILABILITY,
+    OPEN_CREATE_SHOP_LIST_DIALOG,
+    DELETE_INGREDIENT_FROM_RECIPE_SHOP_LIST,
+    SAVE_RECIPE_SHOP_LIST,
+    CANCEL_CREATE_SHOP_LIST,
     /* Ingredient Part */
     RECEIVE_RECIPE_INGREDIENTS,
     RECIPE_INGREDIENT_UPDATE_START,
@@ -44,7 +49,9 @@ import {
     COMMENT_CREATE_SUCCESS,
     COMMENT_UPDATE_SUCCESS,
     COMMENT_DELETE_SUCCESS,
-    QUESTION_DELETE_COMMENT
+    QUESTION_DELETE_COMMENT,
+    /*Shop List Create*/
+    SHOP_LIST_CREATE_SUCCESS
 } from '../constants/message'
 
 
@@ -112,11 +119,45 @@ export const askForDeleteRecipe = (objId) => dispatch => {
     dispatch({ type: SHOW_CONFIRMATION_DIALOG, message: QUESTION_DELETE_RECIPE, confirmationParameters: {type: TYPE_RECIPE, objId: objId}});
 };
 
+// CHECK INGREDIENTS AND CREATE SHOP LIST FROM RECIPE
 export const checkForIngredientAvailability = (objId) => dispatch => {
     axiosInstance.get(BASE_URL + "recipes/" + objId + '/check')
         .then((response)=> {
             dispatch({ type: CHECK_INGREDIENTS_AVAILABILITY, payload: response.data});
         });
+};
+
+export const openCreateShopListDialog = () => dispatch => {
+    dispatch({ type: OPEN_CREATE_SHOP_LIST_DIALOG })
+};
+
+export const deleteIngredientFromRecipeShopList = (objId) => dispatch => {
+    dispatch({ type: DELETE_INGREDIENT_FROM_RECIPE_SHOP_LIST, payload: objId});
+};
+
+export const saveRecipeShopList = (formValues, shopList) => dispatch => {
+    const savingShopList = {
+        name: formValues.name,
+        shopListIngredients: []
+    };
+
+    shopList.shopListIngredients.forEach(ingredient => {
+        savingShopList.shopListIngredients.push({
+            ...ingredient,
+            amount: formValues[ingredient.objId],
+            objId: null
+        });
+    });
+
+    axiosInstance.post(BASE_URL + 'shop-lists', JSON.stringify(savingShopList))
+        .then(() => {
+            dispatch({ type: SAVE_RECIPE_SHOP_LIST });
+            dispatch({type: SHOW_SUCCESS_ALERT, payload: SHOP_LIST_CREATE_SUCCESS});
+        });
+};
+
+export const cancelFromCreateShopList = () => dispatch => {
+    dispatch({ type: CANCEL_CREATE_SHOP_LIST })
 };
 
 // INGREDIENTS OPERATIONS :
