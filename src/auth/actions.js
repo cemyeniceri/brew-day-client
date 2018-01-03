@@ -9,9 +9,9 @@ import axios from "axios";
 import jwtDecode from 'jwt-decode';
 import {browserHistory} from 'react-router'
 import {handleHttpError} from '../util'
+import {removeToken} from "../common/axiosInstance";
 
 export function loginUserSuccess(token) {
-    localStorage.setItem('token', token);
     return {
         type: LOGIN_USER_SUCCESS,
         payload: token
@@ -19,7 +19,7 @@ export function loginUserSuccess(token) {
 }
 
 export function loginUserFailure(error) {
-    localStorage.removeItem('token');
+    removeToken();
     return {
         type: LOGIN_USER_FAILURE,
         payload: {
@@ -36,7 +36,7 @@ export function loginUserRequest() {
 }
 
 export function logout() {
-    localStorage.removeItem('token');
+    removeToken();
     return {
         type: LOGOUT_USER
     }
@@ -58,8 +58,9 @@ export const loginUser = (loginForm) => dispatch => {
         .then((response) => {
         try {
             jwtDecode(response.data.token);
+            localStorage.setItem('token', response.data.token);
             dispatch(loginUserSuccess(response.data.token));
-            browserHistory.push('/')
+            browserHistory.push('/');
         } catch (e) {
             console.log(e);
             dispatch(loginUserFailure({

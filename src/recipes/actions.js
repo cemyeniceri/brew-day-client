@@ -57,14 +57,14 @@ import {
 
 // RECIPE OPERATIONS :
 export const fetchRecipes = () => dispatch => {
-    axiosInstance.get(BASE_URL + 'recipes')
+    axiosInstance().get(BASE_URL + 'recipes')
         .then((response)=> {
             dispatch({ type: RECEIVE_RECIPES, payload: response.data});
     });
 };
 
 export const fetchRecipe = (objId) => dispatch => {
-    axiosInstance.get(BASE_URL + "recipes/" + objId)
+    axiosInstance().get(BASE_URL + "recipes/" + objId)
         .then((response)=> {
         dispatch(fetchComments(objId));
         dispatch(fetchIngredient(objId));
@@ -73,14 +73,14 @@ export const fetchRecipe = (objId) => dispatch => {
 };
 
 export const fetchRecipeForRecipeUpdate = (objId) => dispatch => {
-    axiosInstance.get(BASE_URL + "recipes/" + objId)
+    axiosInstance().get(BASE_URL + "recipes/" + objId)
         .then((response)=> {
             dispatch({ type: RECEIVE_RECIPE_FOR_UPDATE, payload: response.data});
         });
 };
 
 export const createRecipe = (recipe) => dispatch => {
-    axiosInstance.post(BASE_URL + 'recipes', JSON.stringify(recipe))
+    axiosInstance().post(BASE_URL + 'recipes', JSON.stringify(recipe))
         .then(() => {
             dispatch({type: CLEAR_SELECTED_RECIPE});
             dispatch({type: SHOW_SUCCESS_ALERT, payload: RECIPE_CREATE_SUCCESS});
@@ -89,7 +89,7 @@ export const createRecipe = (recipe) => dispatch => {
 };
 
 export const updateRecipe = (recipe) => dispatch => {
-    axiosInstance.put(BASE_URL + 'recipes', JSON.stringify(recipe))
+    axiosInstance().put(BASE_URL + 'recipes', JSON.stringify(recipe))
         .then(() => {
             dispatch({type: SHOW_SUCCESS_ALERT, payload: RECIPE_UPDATE_SUCCESS});
             dispatch(fetchRecipe(recipe.objId));
@@ -106,7 +106,7 @@ export const updateRecipeStart = () => dispatch => {
 };
 
 export const deleteRecipe = (objId) => dispatch => {
-    axiosInstance.delete(BASE_URL + 'recipes/' + objId)
+    axiosInstance().delete(BASE_URL + 'recipes/' + objId)
         .then(() => {
             dispatch(fetchRecipes());
             dispatch({type: CLEAR_SELECTED_RECIPE});
@@ -121,7 +121,7 @@ export const askForDeleteRecipe = (objId) => dispatch => {
 
 // CHECK INGREDIENTS AND CREATE SHOP LIST FROM RECIPE
 export const checkForIngredientAvailability = (objId) => dispatch => {
-    axiosInstance.get(BASE_URL + "recipes/" + objId + '/check')
+    axiosInstance().get(BASE_URL + "recipes/" + objId + '/check')
         .then((response)=> {
             dispatch({ type: CHECK_INGREDIENTS_AVAILABILITY, payload: response.data});
         });
@@ -149,7 +149,7 @@ export const saveRecipeShopList = (formValues, shopList) => dispatch => {
         });
     });
 
-    axiosInstance.post(BASE_URL + 'shop-lists', JSON.stringify(savingShopList))
+    axiosInstance().post(BASE_URL + 'shop-lists', JSON.stringify(savingShopList))
         .then(() => {
             dispatch({ type: SAVE_RECIPE_SHOP_LIST });
             dispatch({type: SHOW_SUCCESS_ALERT, payload: SHOP_LIST_CREATE_SUCCESS});
@@ -162,7 +162,7 @@ export const cancelFromCreateShopList = () => dispatch => {
 
 // INGREDIENTS OPERATIONS :
 export const fetchIngredient = (recipeObjId) => dispatch => {
-    axiosInstance.get(BASE_URL + "recipes/" + recipeObjId + '/ingredients')
+    axiosInstance().get(BASE_URL + "recipes/" + recipeObjId + '/ingredients')
         .then((response)=> {
         dispatch({ type: RECEIVE_RECIPE_INGREDIENTS, payload: response.data});
     });
@@ -177,7 +177,7 @@ export const startCreateRecipeIngredient = () => dispatch => {
 };
 
 export const updateRecipeIngredient = (recipeObjId, ingredient) => dispatch => {
-    axiosInstance.put(BASE_URL + "recipes/" + recipeObjId + '/ingredients/', JSON.stringify(ingredient))
+    axiosInstance().put(BASE_URL + "recipes/" + recipeObjId + '/ingredients/', JSON.stringify(ingredient))
         .then(()=> {
             dispatch({type: SHOW_SUCCESS_ALERT, payload: RECIPE_INGREDIENT_UPDATE_SUCCESS});
             dispatch({ type: CLEAR_SAVING_RECIPE_INGREDIENT });
@@ -186,7 +186,7 @@ export const updateRecipeIngredient = (recipeObjId, ingredient) => dispatch => {
 };
 
 export const createRecipeIngredient = (recipeObjId, ingredient) => dispatch => {
-    axiosInstance.post(BASE_URL + "recipes/" + recipeObjId + '/ingredients/', JSON.stringify(ingredient))
+    axiosInstance().post(BASE_URL + "recipes/" + recipeObjId + '/ingredients/', JSON.stringify(ingredient))
         .then(()=> {
             dispatch({type: SHOW_SUCCESS_ALERT, payload: RECIPE_INGREDIENT_CREATE_SUCCESS});
             dispatch({ type: CLEAR_SAVING_RECIPE_INGREDIENT });
@@ -199,7 +199,7 @@ export const cancelFromSaveRecipeIngredient = () => dispatch => {
 };
 
 export const deleteSelectedRecipeIngredient = (recipeObjId, objId) => dispatch => {
-    axiosInstance.delete(BASE_URL + "recipes/" + recipeObjId + '/ingredients/' + objId)
+    axiosInstance().delete(BASE_URL + "recipes/" + recipeObjId + '/ingredients/' + objId)
         .then(()=> {
             dispatch({ type: HIDE_CONFIRMATION_DIALOG });
             dispatch({type: SHOW_SUCCESS_ALERT, payload: RECIPE_INGREDIENT_DELETE_SUCCESS});
@@ -215,7 +215,7 @@ export const askForDeleteRecipeIngredient = (objId) => dispatch => {
 
 // COMMENT OPERATIONS
 export const fetchComments = (recipeObjId) => dispatch => {
-    axiosInstance.get(BASE_URL + "recipes/" + recipeObjId + '/posts')
+    axiosInstance().get(BASE_URL + "recipes/" + recipeObjId + '/posts')
         .then((response)=> {
             dispatch({ type: RECEIVE_RECIPE_COMMENTS, payload: response.data});
         });
@@ -230,7 +230,7 @@ export const startCreateRecipeComment = () => dispatch => {
 };
 
 export const updateRecipeComment = (recipeObjId, comment) => dispatch => {
-    axiosInstance.put(BASE_URL + "recipes/" + recipeObjId + '/posts/', JSON.stringify(comment))
+    axiosInstance().put(BASE_URL + "recipes/" + recipeObjId + '/posts/', JSON.stringify(comment))
         .then(()=> {
             dispatch({type: SHOW_SUCCESS_ALERT, payload: COMMENT_UPDATE_SUCCESS});
             dispatch({ type: CLEAR_SAVING_RECIPE_COMMENT });
@@ -239,7 +239,7 @@ export const updateRecipeComment = (recipeObjId, comment) => dispatch => {
 };
 
 export const createRecipeComment = (recipeObjId, comment) => dispatch => {
-    axiosInstance.post(BASE_URL + "recipes/" + recipeObjId + '/posts/', JSON.stringify(comment))
+    axiosInstance().post(BASE_URL + "recipes/" + recipeObjId + '/posts/', JSON.stringify(comment))
         .then(()=> {
             dispatch({type: SHOW_SUCCESS_ALERT, payload: COMMENT_CREATE_SUCCESS});
             dispatch({ type: CLEAR_SAVING_RECIPE_COMMENT });
@@ -252,7 +252,7 @@ export const cancelFromSaveRecipeComment = () => dispatch => {
 };
 
 export const deleteSelectedRecipeComment = (recipeObjId, objId) => dispatch => {
-    axiosInstance.delete(BASE_URL + "recipes/" +recipeObjId + '/posts/' + objId)
+    axiosInstance().delete(BASE_URL + "recipes/" +recipeObjId + '/posts/' + objId)
         .then(()=> {
             dispatch({ type: HIDE_CONFIRMATION_DIALOG });
             dispatch({type: SHOW_SUCCESS_ALERT, payload: COMMENT_DELETE_SUCCESS});

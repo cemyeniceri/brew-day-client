@@ -40,3 +40,6 @@ export const SHOP_LIST_INGREDIENT_CREATE_SUCCESS  = 'Shop list ingredient is cre
 export const SHOP_LIST_INGREDIENT_UPDATE_SUCCESS  = 'Shop list ingredient is updated successfully';
 export const SHOP_LIST_INGREDIENT_DELETE_SUCCESS  = 'Shop list ingredient is deleted successfully';
 export const QUESTION_DELETE_SHOP_LIST_INGREDIENT = 'Do you really want to delete selected shop list ingredient?';
+
+// Main Page
+export const RECIPE_IMPORT_SUCCESS = 'Recipe is imported successfully';

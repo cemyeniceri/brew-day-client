@@ -8,7 +8,7 @@ import {
 } from "../constants";
 
 export const openTodaysBrewList = () => dispatch => {
-    axiosInstance.get(BASE_URL + 'recipes/what-should-i-brew-today')
+    axiosInstance().get(BASE_URL + 'recipes/what-should-i-brew-today')
         .then(response => {
             dispatch({type: OPEN_BREW_LIST_DIALOG, payload: response.data});
         });

@@ -1,12 +1,22 @@
 import React from "react"
 import { connect } from 'react-redux';
 import TodaysBrewList from './brewToday/BrewToday'
+import PublicRecipeList from './publicRecipeList/PublicRecipeList';
 
 import {
     openTodaysBrewList
 } from "./brewToday/actions";
 
+import {
+    fetchPublicRecipes,
+    importRecipeList
+} from "./publicRecipeList/actions";
+
 class Home extends React.Component {
+
+    componentDidMount() {
+        this.props.fetchPublicRecipes();
+    }
 
     render() {
         return (
@@ -25,14 +35,23 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className="divider"></div>
+                <PublicRecipeList recipes={this.props.publicRecipes}
+                                  handleImportRecipe={this.props.importRecipeList}
+                />
             </div>
         )
     }
 }
 
+const mapStateToProps = ({publicRecipesReducer: {publicRecipes}}) => ({
+    publicRecipes
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     {
-        openTodaysBrewList
+        fetchPublicRecipes,
+        openTodaysBrewList,
+        importRecipeList
     }
 )(Home);

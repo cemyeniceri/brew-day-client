@@ -19,21 +19,21 @@ import  {
 } from '../constants/message'
 
 export const fetchIngredients = () => dispatch => {
-    axiosInstance.get(BASE_URL + 'ingredients')
+    axiosInstance().get(BASE_URL + 'ingredients')
         .then((response)=> {
         dispatch({type: RECEIVE_INGREDIENTS, payload: response.data})
     });
 };
 
 export const fetchIngredient = (objId) => dispatch => {
-    axiosInstance.get(BASE_URL + "ingredients/" + objId)
+    axiosInstance().get(BASE_URL + "ingredients/" + objId)
         .then((response)=> {
             dispatch({type: RECEIVE_INGREDIENT, payload: response.data})
         });
 };
 
 export const createIngredient = (ingredient) => dispatch => {
-    axiosInstance.post(BASE_URL + 'ingredients', JSON.stringify(ingredient))
+    axiosInstance().post(BASE_URL + 'ingredients', JSON.stringify(ingredient))
         .then(() => {
         dispatch({type: SHOW_SUCCESS_ALERT, payload: INGREDIENT_CREATE_SUCCESS});
         browserHistory.push('/ingredients');
@@ -41,7 +41,7 @@ export const createIngredient = (ingredient) => dispatch => {
 };
 
 export const updateIngredient = (ingredient) => dispatch => {
-    axiosInstance.put(BASE_URL + 'ingredients', JSON.stringify(ingredient))
+    axiosInstance().put(BASE_URL + 'ingredients', JSON.stringify(ingredient))
         .then(() => {
         dispatch({type: SHOW_SUCCESS_ALERT, payload: INGREDIENT_UPDATE_SUCCESS});
         browserHistory.push('/ingredients');
@@ -49,7 +49,7 @@ export const updateIngredient = (ingredient) => dispatch => {
 };
 
 export const deleteIngredient = (objId) => dispatch => {
-    axiosInstance.delete(BASE_URL + 'ingredients/' + objId)
+    axiosInstance().delete(BASE_URL + 'ingredients/' + objId)
         .then(() => {
         dispatch(fetchIngredients());
         dispatch({type: HIDE_CONFIRMATION_DIALOG});

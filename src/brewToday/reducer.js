@@ -11,7 +11,6 @@ const initialState = {
 function brewTodayReducer(state = initialState, action) {
     switch (action.type) {
         case OPEN_BREW_LIST_DIALOG: {
-            console.log(action.payload);
             state = {
                 ...state,
                 isShowing: true,
